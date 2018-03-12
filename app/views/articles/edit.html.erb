@@ -1,0 +1,38 @@
+<header>
+    <p id="logo"><%= link_to "/" do %>
+      RailsCamp<span>Blog</span>
+    <% end %></p>
+    <nav>
+        <ul>
+            <% if user_signed_in? %>
+              <li><%= link_to "トップ", "/" %></li>
+              <li><%= link_to "新規投稿", "/new" %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></li>
+            <% else %>
+              <li><%= link_to "トップ", "/" %></li>
+              <li><%= link_to "ユーザー登録", new_user_registration_path %></li>
+              <li><%= link_to "ログイン", new_user_session_path %></li>
+            <% end %>
+            <div class="clear"></div>
+        </ul>
+    </nav>
+    <div class="clear"></div>
+</header>
+
+<body>
+<div class="scan">
+    <%= form_tag("/articles/#{@article.id}/update") do %>
+        タイトル
+        <p><input name="title"value="<%= @article.title %>"></p>
+        記事内容
+        <p><textarea name="body"><%= @article.body %></textarea></p>
+        <p><input type="submit" value="Update Article"></p>
+    <% end %>
+</div>
+</body>
+
+<footer>
+    <div id="footer_inner">
+        <p>Copyright RailsCamp 2015 All Rights Reserved</p>
+    </div>
+  </footer>

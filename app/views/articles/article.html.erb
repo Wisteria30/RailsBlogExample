@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<div id="article_wrap">
+
+    <div id="content">
+        
+                    <h2>どれもtrueかfalseかnilを判定するメソッドです。</h2>
+                    <p>
+                    nil?とempty?はrubyのメソッドであり、blank?とpresent?はrailsで拡張されたメソッドです。なので、blank?とpresent?はRailsでしか使えません。
+                    まず１つ１つの意味をみていきましょう。
+                    </p>
+                    
+                    <h2>nil?</h2>
+                    <p>
+                    nilなので何も存在してない（配列や文字列などの入れ物もない）場合にtrueになります。
+                    nilの場合のみtrueを返し、それ以外はfalseを返します。
+                    例えば、以下の場合は入れ物があるので、falseです。
+                    </p>
+                    
+                    <h2>empty?</h2>
+                    <p>
+                    入れ物があり、それが空の場合はtrueです。
+                    空の文字列や空の配列の場合にtrueを返します。nilに対して呼び出すとNoMethodErrorが発生します。
+                    </p>
+                    
+                    <h2>blank?</h2>
+                    <p>
+                    nil?、もしくはempty?のどちらかがTrueであればTrue、nil? or empty? のようなメソッド。
+                    </p>
+                     
+                    <h2>まとめ</h2>
+                    <p>
+                    何もないか確認したいときはnil?
+                    入れ物があって空か確認したいときはempty?
+                    nil?、もしくはempty?を確認したければblank?
+                    !blank?と書くならpresent?
+                    </p>
+                
+    </div>
+</div>
+
+</body>
+</html>

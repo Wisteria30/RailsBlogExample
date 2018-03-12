@@ -1,0 +1,63 @@
+<!DOCTYPE>
+<html>
+<body>
+
+<header>
+    <p id="logo"><%= link_to "/" do %>
+      RailsCamp<span>Blog</span>
+    <% end %></p>
+    <nav>
+        <ul>
+            <% if user_signed_in? %>
+              <li><%= link_to "トップ", "/" %></li>
+              <li><%= link_to "新規投稿", "/new" %></li>
+              <li><%= link_to "ログアウト", destroy_user_session_path, method: "delete" %></li>
+            <% else %>
+              <li><%= link_to "トップ", "/" %></li>
+              <li><%= link_to "ユーザー登録", new_user_registration_path %></li>
+              <li><%= link_to "ログイン", new_user_session_path %></li>
+            <% end %>
+            <div class="clear"></div>
+        </ul>
+    </nav>
+    <div class="clear"></div>
+</header>
+
+<div id="title">
+    <div>
+        <% string = @article.updated_at.to_s %>
+        <% createTime = / /.match(string.gsub(/\-/, "/")).pre_match %>
+        <p><%= createTime %> / 書いた人:<%= @article.create_user %></p>
+        <h1><%= @article.title %></h1>
+    </div>
+</div>
+
+<div id="article_wrap">
+
+<div id="content">
+    <p><%= @article.body %></p>
+</div>
+
+<div id="sidebar">
+
+    <h2>★PV数ランキング</h2>
+    <ul>
+        <% @ids.each do |id| %>
+            <% articleRank = Article.find_by(id: id) %>
+            <% pvcount = REDIS.zscore "articles/pv", id %>
+            <li><%= link_to articleRank.title, "/articles/#{articleRank.id}" %>&nbsp;（<%= pvcount.to_i %>PV）</li>
+        <% end %>
+    </ul>
+</div>
+<div class="clear"></div>
+</div>
+
+</body>
+
+  <footer>
+    <div id="footer_inner">
+        <p>Copyright RailsCamp 2015 All Rights Reserved</p>
+    </div>
+  </footer>
+
+</html>
